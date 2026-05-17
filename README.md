@@ -56,6 +56,7 @@ If you're already comfortable with Git, jump straight to **Agentic Coding** and 
 
 ### 6. OpenClaw Integration
 - [01: OpenClaw Rundown](./6-openclaw/01-openclaw-rundown.md)
+- [02: Multi-Repo Integration](./6-openclaw/02-multi-repo-integration.md)
 
 ---
 
