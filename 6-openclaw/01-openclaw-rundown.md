@@ -134,6 +134,88 @@ OpenClaw ships with over **50+ built-in skills** out of the box to control your 
 
 ---
 
+## 🛡️ System & Developer Grounded Skills
+
+OpenClaw is highly unique because it contains deep, system-level capabilities that go far beyond simple social-app parsing or calendar checks. These represent robust tools for developers, systems engineers, and power users.
+
+### 1. OS-level UI Automation (`skills/peekaboo`)
+Uses `peekaboo` (a specialized macOS Screen/Accessibility automation driver) to capture, inspect, and automate the macOS desktop environment. It allows the agent to visually parse the screen, target specific window bounds, and perform human-like input:
+```bash
+# Check Screen Recording & Accessibility permissions
+peekaboo permissions
+
+# Get a detailed visual annotated map of elements on screen
+peekaboo see --annotate --path /tmp/screenshot.png
+
+# Click an accessibility target by ID
+peekaboo click --on B1
+
+# Type text with human WPM pacing and trailing return
+peekaboo type "Hello World" --wpm 110 --return
+```
+
+### 2. Node.js CDP Debugger (`skills/node-inspect-debugger`)
+Allows the agent to attach to Node.js / TypeScript processes, inject Chrome DevTools Protocol (CDP) commands, step through loops, inspect scopes, and record CPU/heap performance snapshots:
+```bash
+# Start a debugger session and pause on first execution line
+node --inspect-brk --import tsx index.ts
+
+# Attaches debugger by process PID
+node inspect -p <pid>
+
+# Capture a heap snapshot for memory analysis
+node --inspect scripts/run-vitest.mjs my-test.ts
+```
+
+### 3. Python debugpy Attachment (`skills/python-debugpy`)
+Enables the agent to attach to local or remote Python applications using `debugpy` or `pdb` post-mortem handlers for unhandled exception capture:
+```bash
+# Spin up debugpy listening for headless remote DAP client attachment
+python3 -m debugpy --listen 127.0.0.1:5678 --wait-for-client my_script.py
+
+# Attach directly to an already running PID to inspect state
+python3 -m debugpy --listen 127.0.0.1:5678 --pid <pid>
+```
+
+### 4. Frame Media Extraction (`skills/video-frames`)
+Leverages `ffmpeg` wrappers to perform frame capture and thumbnails extraction from video streams for visual agent verification:
+```bash
+# Extract the first frame of a video for visual analysis
+./scripts/frame.sh /path/to/video.mp4 --out /tmp/frame.jpg
+
+# Grab frame at exactly 10 seconds offset
+./scripts/frame.sh /path/to/video.mp4 --time 00:00:10 --out /tmp/frame-10s.jpg
+```
+
+### 5. Sprite Sheet Generation (`skills/gifgrep`)
+Searches Tenor/Giphy via the Go-based `gifgrep` binary and samples animated GIF frames into single-image PNG sprite grids, reducing data transfer for visual review:
+```bash
+# Download and sample a GIF into a 3x3 frame sampling sheet
+gifgrep sheet ./clip.gif --frames 9 --cols 3 -o sheet.png
+```
+
+### 6. Network Topology Diagnostics (`skills/node-connect`)
+An advanced diagnostic runbook that automates network route verification for mobile nodes connecting to the local gateway (validating LAN configurations, Tailscale MagicDNS Serve/Funnel pipelines, and generating secure setup-code payloads).
+```bash
+# Generate the exact connection payload in JSON format
+openclaw qr --json
+
+# Approve a pending paired device
+openclaw devices approve --latest
+```
+
+### 7. Physical Hardware Control (`skills/eightctl`)
+Controls Sleep Pods (thermostats, schedules, and sleep diagnostics) through unofficial local hardware REST API clients written in Go:
+```bash
+# Read hardware sleep pod status
+eightctl status
+
+# Set target temperature
+eightctl temp 21
+```
+
+---
+
 ## 🛠️ The Flagship Skill: Coding Agent (`skills/coding-agent`)
 
 The `coding-agent` skill is a perfect showcase of advanced agentic orchestration. It tells the OpenClaw agent how to spawn background subprocesses using heavy coding agents (like Claude Code, OpenAI Codex, or Pi) in isolated checkouts, capture the notification routes, and send back PR status updates:
