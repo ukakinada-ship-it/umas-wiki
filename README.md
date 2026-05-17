@@ -12,6 +12,7 @@ Learn the fundamentals of version control, how to navigate the terminal, and col
 - [02: Using the Git CLI](./1-git-and-github/02-using-git-cli.md)
 - [03: GitHub Website and Pull Requests](./1-git-and-github/03-github-website-and-prs.md)
 - [04: Diffs and Code Review](./1-git-and-github/04-diffs-and-code-review.md)
+- [05: The GitHub CLI (`gh`)](./1-git-and-github/05-github-cli.md)
 
 ### 2. Antigravity and Agentic Coding
 Discover how to supercharge your development by building and collaborating with AI agents.
