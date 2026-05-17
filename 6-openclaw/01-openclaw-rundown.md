@@ -216,6 +216,30 @@ eightctl temp 21
 
 ---
 
+## 💼 Engineering Workflows: Software & ML
+
+In real-world production settings, OpenClaw operates as a highly automated sidekick for developers and machine learning practitioners, running tasks in background environments while engineers focus on complex architecture.
+
+### 1. Software Engineering (SWE) Workflows
+
+*   **Self-Healing CI & Triage**: 
+    If a GitHub Actions build fails or tests flake, OpenClaw intercepts the webhook event. It retrieves the test failure output, maps the stack trace to the source file, and spins up an isolated, sandboxed background worker (via the `coding-agent` skill running Claude Code or Codex). The worker fixes the bug, validates the change locally, runs linters, and opens a self-correcting Pull Request.
+*   **Visual QA & Emulator Testing**: 
+    Using the `peekaboo` and `canvas` skills, the agent can launch a locally compiled iOS Simulator, Android Emulator, or Web page, perform custom GUI click flows, capture motion-aware screenshots, extract system logs, and post the test results (including visual proof) directly into engineering Slack channels.
+*   **Away-from-Desk Hot Debugging**: 
+    If a developer is away from their desk and gets paged about a stuck process, they can send a direct message on Telegram/Slack: `/debug-process --pid 8089`. OpenClaw attaches to the running process using the `node-inspect-debugger` or `python-debugpy` skill, captures the active call stacks, evaluates local scopes, dumps a diagnostic trace, and messages it back to the engineer.
+
+### 2. Machine Learning (ML) Engineering Workflows
+
+*   **Long-Running Training & VRAM Monitoring**: 
+    ML engineers run long training runs (e.g., PyTorch loops) on headless remote GPU instances. OpenClaw runs a monitoring loop tracking metrics (Loss, Accuracy, Epochs, VRAM occupancy, and GPU temperatures). It sends scheduled status digests to the engineer, or triggers an urgent pager message if it detects exploding gradients (`NaN` loss) or an imminent Out-Of-Memory (`OOM`) exception—offering options to safely terminate or checkpoint the run via text response.
+*   **Evaluation & Inference Pipeline Audits**: 
+    During model evaluations, OpenClaw coordinates scripts to pass verification payloads through an active inference server. For computer vision or generative video pipelines, it uses the `video-frames` or `gifgrep` skills to extract sample inference predictions, compile them into lightweight, annotated 3x3 sprite sheets, and send them to the engineer for instantaneous visual human-in-the-loop evaluation.
+*   **Local Inference Gateway Orchestration**: 
+    Using health checks and local daemons, OpenClaw manages local LLM setups (like Ollama or vLLM instances). It dynamically balances model loading (shifting weights to/from system memory and GPU VRAM based on active usage), and auto-heals inference container crashes or memory leaks to maintain continuous local availability.
+
+---
+
 ## 🛠️ The Flagship Skill: Coding Agent (`skills/coding-agent`)
 
 The `coding-agent` skill is a perfect showcase of advanced agentic orchestration. It tells the OpenClaw agent how to spawn background subprocesses using heavy coding agents (like Claude Code, OpenAI Codex, or Pi) in isolated checkouts, capture the notification routes, and send back PR status updates:
