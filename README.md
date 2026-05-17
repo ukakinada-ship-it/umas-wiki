@@ -13,6 +13,7 @@ Use the **sidebar on the right** to navigate between sections.
 | 3 | **Bazel** | Why Bazel exists, how to structure a workspace, and essential commands |
 | 4 | **Ollama** | Running LLMs locally, model selection, and compute requirements |
 | 5 | **Docker + Bazel** | Dev containers, running Bazel inside Docker, Python toolchains, and a full worked multi-Python example |
+| 6 | **OpenClaw Integration** | What OpenClaw is, how to set it up, and how to utilize its rich ecosystem of 50+ built-in skills to supercharge your workspace |
 
 ## Recommended Reading Order
 
@@ -52,6 +53,9 @@ If you're already comfortable with Git, jump straight to **Agentic Coding** and 
 - [03: Repo Structure for Bazel + Docker](./5-docker-environments/03-repo-structure-bazel-docker.md)
 - [04: Bazel Python Toolchains](./5-docker-environments/04-bazel-python-toolchains.md)
 - [05: Worked Example — Multiple Python Versions](./5-docker-environments/05-multi-python-docker-bazel.md)
+
+### 6. OpenClaw Integration
+- [01: OpenClaw Rundown](./6-openclaw/01-openclaw-rundown.md)
 
 ---
 
